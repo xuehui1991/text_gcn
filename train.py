@@ -46,14 +46,38 @@ flags.DEFINE_integer('early_stopping', 10,
 flags.DEFINE_integer('max_degree', 3, 'Maximum Chebyshev polynomial degree.')
 
 # Load data
-adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask, train_size, test_size = load_corpus(
+adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask, train_size, test_size, _ = load_corpus(
     FLAGS.dataset)
-print(adj)
+
+print(type(adj))
+#print(adj.shape)
+
+print()
+
+for temp in adj:
+    print(temp)
+    print(type(temp))
+    break
+    #print("row = %d, column = %d, value = %s" % (i,j,v))
+
+print()
+
+print(features.shape)
+print(y_train.shape)
+print(y_val.shape)
+print(y_test.shape)
+print(train_mask.shape)
+print(val_mask.shape)
+print(test_mask.shape)
+
 # print(adj[0], adj[1])
 features = sp.identity(features.shape[0])  # featureless
 
 print(adj.shape)
 print(features.shape)
+print("!!!!")
+print(y_train[0])
+
 
 # Some preprocessing
 features = preprocess_features(features)

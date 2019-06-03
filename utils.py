@@ -163,6 +163,8 @@ def load_corpus(dataset_str):
     idx_test = range(allx.shape[0], allx.shape[0] + test_size)
 
     train_mask = sample_mask(idx_train, labels.shape[0])
+    print("train_mask ", str(train_mask.shape))
+    print(labels.shape)
     val_mask = sample_mask(idx_val, labels.shape[0])
     test_mask = sample_mask(idx_test, labels.shape[0])
 
@@ -170,12 +172,14 @@ def load_corpus(dataset_str):
     y_val = np.zeros(labels.shape)
     y_test = np.zeros(labels.shape)
     y_train[train_mask, :] = labels[train_mask, :]
+    print("y_train shape", str(y_train.shape))
     y_val[val_mask, :] = labels[val_mask, :]
     y_test[test_mask, :] = labels[test_mask, :]
+    print("labels shape ", str(labels.shape))
 
     adj = adj + adj.T.multiply(adj.T > adj) - adj.multiply(adj.T > adj)
 
-    return adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask, train_size, test_size
+    return adj, features, y_train, y_val, y_test, train_mask, val_mask, test_mask, train_size, test_size, labels
 
 
 def sparse_to_tuple(sparse_mx):
